@@ -1,0 +1,174 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "Account Management",
+      "description": "API documentation for Account Management",
+      "version": "v1"
+    },
+    "host": "localhost:8000",
+    "schemes": [
+      "http"
+    ],
+    "basePath": "/account",
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "securityDefinitions": {
+      "Basic": {
+        "type": "basic"
+      }
+    },
+    "security": [
+      {
+        "Basic": []
+      }
+    ],
+    "paths": {
+      "/create/": {
+        "post": {
+          "operationId": "create_create",
+          "summary": "Create Account",
+          "description": "Password need containing at least 1 uppercase letter, 1 lowercase letter, and 1 number",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "required": [
+                  "username",
+                  "password"
+                ],
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "maxLength": 32,
+                    "minLength": 3
+                  },
+                  "password": {
+                    "type": "string",
+                    "maxLength": 32,
+                    "minLength": 8
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "",
+              "schema": {
+                "required": [
+                  "success"
+                ],
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "",
+              "schema": {
+                "required": [
+                  "success",
+                  "reason"
+                ],
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean"
+                  },
+                  "reason": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "tags": [
+            "create"
+          ]
+        },
+        "parameters": []
+      },
+      "/verify/": {
+        "post": {
+          "operationId": "verify_create",
+          "summary": "Verify Account and Password",
+          "description": "If the password verification fails 5 times, the user should wait 1 minute before attempting to verify the password again",
+          "parameters": [
+            {
+              "name": "data",
+              "in": "body",
+              "required": true,
+              "schema": {
+                "required": [
+                  "username",
+                  "password"
+                ],
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "maxLength": 32,
+                    "minLength": 3
+                  },
+                  "password": {
+                    "type": "string",
+                    "maxLength": 32,
+                    "minLength": 8
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "",
+              "schema": {
+                "required": [
+                  "success"
+                ],
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "",
+              "schema": {
+                "required": [
+                  "success",
+                  "reason"
+                ],
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean"
+                  },
+                  "reason": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "tags": [
+            "verify"
+          ]
+        },
+        "parameters": []
+      }
+    },
+    "definitions": {}
+  }
